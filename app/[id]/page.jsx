@@ -8,18 +8,27 @@ const getData = async (param, id) => {
       `https://www.themealdb.com/api/json/v1/1/filter.php?c=${id}`,
       { next: { revalidate: 0 } }
     );
+    if (!res.ok) {
+      notFound();
+    }
     return res.json();
   } else if (param == "Country") {
     const res = await fetch(
       `https://www.themealdb.com/api/json/v1/1/filter.php?a=${id}`,
       { next: { revalidate: 0 } }
     );
+    if (!res.ok) {
+      notFound();
+    }
     return res.json();
   } else if (param == "Search") {
     const res = await fetch(
       `https://www.themealdb.com/api/json/v1/1/search.php?s=${id}`,
       { next: { revalidate: 0 } }
     );
+    if (!res.ok) {
+      notFound();
+    }
     return res.json();
   }
 };
@@ -61,7 +70,9 @@ export default async function page({ params }) {
         })}
       {result == undefined && (
         <div className="w-full text-green-500 text-center">
-          <h1>Sorry, Cannot Find the Page.</h1>
+          <h1>
+            Sorry, Cannot Find the Page.{before} {after}
+          </h1>
         </div>
       )}
     </div>
