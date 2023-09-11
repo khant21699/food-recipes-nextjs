@@ -24,7 +24,7 @@ export default function NavComponents({ name, list = [] }) {
               return (
                 <Link
                   key={index}
-                  href={`${name}+${l}`}
+                  href={`/${name}+${l}`}
                   onClick={() => {
                     setShow(false);
                   }}
