@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -8,27 +9,18 @@ const getData = async (param, id) => {
       `https://www.themealdb.com/api/json/v1/1/filter.php?c=${id}`,
       { next: { revalidate: 0 } }
     );
-    if (!res.ok) {
-      getData(param, id);
-    }
     return res.json();
   } else if (param == "Country") {
     const res = await fetch(
       `https://www.themealdb.com/api/json/v1/1/filter.php?a=${id}`,
       { next: { revalidate: 0 } }
     );
-    if (!res.ok) {
-      getData(param, id);
-    }
     return res.json();
   } else if (param == "Search") {
     const res = await fetch(
       `https://www.themealdb.com/api/json/v1/1/search.php?s=${id}`,
       { next: { revalidate: 0 } }
     );
-    if (!res.ok) {
-      getData(param, id);
-    }
     return res.json();
   }
 };
@@ -42,6 +34,7 @@ export default async function page({ params }) {
     notFound();
   }
   const result = await getData(before, after);
+  console.log(result);
   if (result.meals == null) {
     notFound();
   }
