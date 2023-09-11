@@ -40,7 +40,7 @@ const getData = async () => {
 export default async function Nav() {
   const data = await getData();
   return (
-    <nav className="NavBar">
+    <nav className="NavBar h-[100px]">
       <Link href="/">
         <h1 className="Logo">Tasty</h1>
       </Link>

@@ -29,13 +29,13 @@ export default async function page({ params }) {
   var parts = id.split("%2B");
   var before = parts[0];
   var after = parts[1];
-  if (after == null) {
-    notFound();
-  }
+  // if (after == null) {
+  //   notFound();
+  // }
   const result = await getData(before, after);
-  if (result.meals == null) {
-    notFound();
-  }
+  // if (result.meals == null) {
+  //   notFound();
+  // }
   return (
     <div className="flex flex-col gap-4">
       {result.meals.map((m, index) => {
