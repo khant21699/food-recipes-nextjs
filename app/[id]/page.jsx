@@ -38,26 +38,32 @@ export default async function page({ params }) {
   // }
   return (
     <div className="flex flex-col gap-4">
-      {result.meals.map((m, index) => {
-        return (
-          <Link href={`/recipes/${m.idMeal}`}>
-            <div className=" h-[250px] px-4 items-center gap-10 flex  border-green-400 border-[2px]">
-              <div className=" w-2/5 aspect-square imgcontainer md:w-[200px]">
-                <Image
-                  src={`${m.strMealThumb}/preview`}
-                  quality={100}
-                  alt="foodImg"
-                  layout="responsive"
-                  className=" object-cover"
-                  width={100}
-                  height={100}
-                />
+      {result.meals !== null &&
+        result.meals.map((m, index) => {
+          return (
+            <Link href={`/recipes/${m.idMeal}`}>
+              <div className=" h-[250px] px-4 items-center gap-10 flex  border-green-400 border-[2px]">
+                <div className=" w-2/5 aspect-square imgcontainer md:w-[200px]">
+                  <Image
+                    src={`${m.strMealThumb}/preview`}
+                    quality={100}
+                    alt="foodImg"
+                    layout="responsive"
+                    className=" object-cover"
+                    width={100}
+                    height={100}
+                  />
+                </div>
+                <h3 className="w-3/5 text-green-500">{m.strMeal}</h3>
               </div>
-              <h3 className="w-3/5 text-green-500">{m.strMeal}</h3>
-            </div>
-          </Link>
-        );
-      })}
+            </Link>
+          );
+        })}
+      {result.meals == null && (
+        <div className="w-full text-green-500 text-center">
+          <h1>Sorry, Cannot Find the Page.</h1>
+        </div>
+      )}
     </div>
   );
 }
