@@ -38,7 +38,7 @@ export default async function page({ params }) {
   // }
   return (
     <div className="flex flex-col gap-4">
-      {result.meals !== null &&
+      {result !== undefined &&
         result.meals.map((m, index) => {
           return (
             <Link href={`/recipes/${m.idMeal}`}>
@@ -59,7 +59,7 @@ export default async function page({ params }) {
             </Link>
           );
         })}
-      {result.meals == null && (
+      {result == undefined && (
         <div className="w-full text-green-500 text-center">
           <h1>Sorry, Cannot Find the Page.</h1>
         </div>
