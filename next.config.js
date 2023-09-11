@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  images: {
+    domains: ["www.themealdb.com"], // Add the domain(s) from which you are loading images
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
