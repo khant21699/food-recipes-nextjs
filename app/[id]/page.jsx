@@ -15,6 +15,7 @@ const getData = async (param, id) => {
       `https://www.themealdb.com/api/json/v1/1/filter.php?a=${id}`,
       { next: { revalidate: 0 } }
     );
+
     return res.json();
   } else if (param == "Search") {
     const res = await fetch(
@@ -30,11 +31,13 @@ export default async function page({ params }) {
   var parts = id.split("%2B");
   var before = parts[0];
   var after = parts[1];
+  console.log(id);
   if (after == null) {
     notFound();
   }
+  console.log("OK");
   const result = await getData(before, after);
-  console.log(result);
+  // console.log(result);
   if (result.meals == null) {
     notFound();
   }

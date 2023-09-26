@@ -97,13 +97,13 @@ export default async function page({ params }) {
         </ul>
       </p> */}
             <p>
-              <span className=" text-green-500">Category : </span>
+              <span className=" pb-4 text-green-500">Category : </span>
               {recipe.meals[0].strCategory}
             </p>
-            <p>
+            {/* <p>
               <span className=" text-green-500">Category : </span>
               {recipe.meals[0].strCategory}
-            </p>
+            </p> */}
           </div>
         </div>
       )}
