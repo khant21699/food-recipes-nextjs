@@ -9,7 +9,6 @@ const getData = async (param, id) => {
       `https://www.themealdb.com/api/json/v1/1/filter.php?c=${id}`,
       { next: { revalidate: 0 }, cache: "no-store" }
     );
-    console.log(res);
 
     return res.json();
   } else if (param == "Country") {
@@ -17,7 +16,6 @@ const getData = async (param, id) => {
       `https://www.themealdb.com/api/json/v1/1/filter.php?a=${id}`,
       { next: { revalidate: 0 }, cache: "no-store" }
     );
-    console.log(res);
 
     return res.json();
   } else if (param == "Search") {
@@ -25,7 +23,6 @@ const getData = async (param, id) => {
       `https://www.themealdb.com/api/json/v1/1/search.php?s=${id}`,
       { next: { revalidate: 0 }, cache: "no-store" }
     );
-    console.log(res);
 
     return res.json();
   } else {
@@ -36,14 +33,14 @@ const getData = async (param, id) => {
 async function page({ searchParams }) {
   console.log(searchParams.category);
   const result = await getData(searchParams.category, searchParams.param);
-  // console.log(result);
+  console.log(result);
   if (!result) {
     notFound();
   }
   return (
     <div className="flex flex-col gap-4">
       <h2>Result For : {searchParams.param}</h2>
-      {result.meals.map((m, index) => {
+      {result.meals?.map((m) => {
         return (
           <Link href={`/recipes/${m.idMeal}`}>
             <div className=" h-[250px] px-4 items-center gap-10 flex  border-green-400 border-[2px]">
@@ -63,6 +60,11 @@ async function page({ searchParams }) {
           </Link>
         );
       })}
+      {result.meals == null && (
+        <h2 className=" text-center text-green-500 text-xl">
+          No Result for : {searchParams.param}
+        </h2>
+      )}
     </div>
   );
 }
