@@ -23,8 +23,10 @@ export default function NavComponents({ name, list = [] }) {
             {list.map((l, index) => {
               return (
                 <Link
+                  prefetch={false}
                   key={index}
-                  href={`/${name}+${l}`}
+                  href={`/result?category=${name}&param=${l}`}
+                  as={`/result?category=${name}&param=${l}`}
                   onClick={() => {
                     setShow(false);
                   }}

@@ -1,48 +1,48 @@
-"use client";
-import React from "react";
-import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import React from "react";
+
 const getData = async (param, id) => {
   if (param == "Categories") {
     const res = await fetch(
       `https://www.themealdb.com/api/json/v1/1/filter.php?c=${id}`,
-      { next: { revalidate: 0 } }
+      { next: { revalidate: 0 }, cache: "no-store" }
     );
+    console.log(res);
+
     return res.json();
   } else if (param == "Country") {
     const res = await fetch(
       `https://www.themealdb.com/api/json/v1/1/filter.php?a=${id}`,
-      { next: { revalidate: 0 } }
+      { next: { revalidate: 0 }, cache: "no-store" }
     );
+    console.log(res);
 
     return res.json();
   } else if (param == "Search") {
     const res = await fetch(
       `https://www.themealdb.com/api/json/v1/1/search.php?s=${id}`,
-      { next: { revalidate: 0 } }
+      { next: { revalidate: 0 }, cache: "no-store" }
     );
+    console.log(res);
+
     return res.json();
+  } else {
+    return null;
   }
 };
 
-export default async function page({ params }) {
-  const id = params.id;
-  var parts = id.split("%2B");
-  var before = parts[0];
-  var after = parts[1];
-  console.log(id);
-  if (after == null) {
-    notFound();
-  }
-  console.log("OK");
-  const result = await getData(before, after);
+async function page({ searchParams }) {
+  console.log(searchParams.category);
+  const result = await getData(searchParams.category, searchParams.param);
   // console.log(result);
-  if (result.meals == null) {
+  if (!result) {
     notFound();
   }
   return (
     <div className="flex flex-col gap-4">
+      <h2>Result For : {searchParams.param}</h2>
       {result.meals.map((m, index) => {
         return (
           <Link href={`/recipes/${m.idMeal}`}>
@@ -66,3 +66,5 @@ export default async function page({ params }) {
     </div>
   );
 }
+
+export default page;

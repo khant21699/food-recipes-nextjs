@@ -8,7 +8,7 @@ const SearchBar = () => {
     e.preventDefault();
 
     const name = e.target.dishname.value;
-    router.push(`Search+${name}`);
+    router.push(`/result?category=Search&param=${name}`);
     e.target.dishname.value = "";
   };
   return (
