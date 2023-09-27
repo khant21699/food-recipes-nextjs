@@ -20,7 +20,7 @@ const SearchBar = () => {
         <input
           type="text"
           name="dishname"
-          className="h-[50px] p-2 outline-none focus:border-green-500 w-4/5 border-[2px] text-black border-black"
+          className="h-[50px] focus-within:outline-none rounded-none p-2 outline-none focus:border-green-500 w-4/5 border-[2px] text-black border-black"
         />
         <button className="bg-green-500 w-1/5 h-[50px]" type="submit">
           Search
